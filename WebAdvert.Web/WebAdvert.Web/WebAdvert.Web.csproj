@@ -9,7 +9,7 @@
     <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="1.0.4" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.111.36" />
-    <PackageReference Include="Kshv.WebAdvert.Models" Version="1.0.1" />
+    <PackageReference Include="Kshv.WebAdvert.Models" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.1.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
