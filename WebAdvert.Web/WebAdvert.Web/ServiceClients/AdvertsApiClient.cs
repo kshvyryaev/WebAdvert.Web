@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using Newtonsoft.Json;
 using WebAdvert.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAdvert.Web.ServiceClients
 {
@@ -44,6 +46,22 @@ namespace WebAdvert.Web.ServiceClients
                 new Uri($"{_baseAddress}/confirm"),
                 new StringContent(jsonModel, Encoding.UTF8, "application/json")).ConfigureAwait(false);
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public async Task<List<Advertisement>> GetAllAsync()
+        {
+            var response = await _client.GetAsync(new Uri($"{_baseAddress}/all")).ConfigureAwait(false);
+            var responseAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var models = JsonConvert.DeserializeObject<List<AdvertModel>>(responseAsString);
+            return models.Select(x => _mapper.Map<Advertisement>(x)).ToList();
+        }
+
+        public async Task<Advertisement> GetAsync(string advertId)
+        {
+            var response = await _client.GetAsync(new Uri($"{_baseAddress}/{advertId}")).ConfigureAwait(false);
+            var responseAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var model = JsonConvert.DeserializeObject<AdvertModel>(responseAsString);
+            return _mapper.Map<Advertisement>(model);
         }
     }
 }

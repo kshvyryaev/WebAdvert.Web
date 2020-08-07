@@ -1,0 +1,20 @@
+﻿@using Microsoft.Extensions.Configuration;
+@model WebAdvert.Web.Models.Home.IndexViewModel
+@inject IConfiguration configuration
+
+@{
+    var advertImageUrl = configuration.GetValue<string>("ImageBaseUrl");
+}
+
+<div class="card">
+    <a href="#" class="boxClick" data-id="@Model.Id">
+        @{
+            var defaultImageUrl = "https://i.ytimg.com/vi/bfqSdCHKrgs/maxresdefault.jpg";
+            var imageUrl = string.IsNullOrEmpty(Model.Image) ? defaultImageUrl : $"{advertImageUrl}/{Model.Image}";
+        }
+        <img src="@imageUrl" alt="Avatar" style="width:100%">
+        <div class="container">
+            <p>@Model.Title</p>
+        </div>
+    </a>
+</div>
